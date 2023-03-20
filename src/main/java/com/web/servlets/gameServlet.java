@@ -5,17 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
+import com.bo.GameState;
+import com.bo.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "gameServlet", value = "/game")
+@WebServlet(name = "game", value = "/game")
 public class gameServlet extends HttpServlet {
-    int score = 0;
-    List<Integer> dejaplay = new ArrayList<>();
-    String urlCible = "WEB-INF/vues/game.jsp";
-
+    //    int score = 0;
+//    List<Integer> dejaplay = new ArrayList<>();
+    String urlCible = "WEB-INF/vues/back/game.jsp";
 
     public gameServlet() {
         System.out.println("le constructeur de la servlet gameservlet est appelé");
@@ -26,44 +26,60 @@ public class gameServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String urlCible = "WEB-INF/vues/game.jsp";
-        request.getRequestDispatcher(urlCible).forward(request, response);
         System.out.println("il est dans game get");
+        request.getRequestDispatcher(urlCible).forward(request, response);
+        return;
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
         System.out.println("il est dans game Post");
         // recevoir le numéro de dé depuis la formulaire
         String numerode = request.getParameter("numerode");
-        System.out.println("numde" + numerode);
+        System.out.println("num de dé ==> " + numerode);
         // créer un nombre aléatoire de dé
         Random random = new Random();
         int resultat = random.nextInt(6) + 1;
-        System.out.println("resulttat random" + resultat);
+        System.out.println("resultat random de==> " + resultat);
 
         // recevoir la session
         var session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        GameState gameState = (GameState) session.getAttribute("gameState");
 
         //  condition pour que si le joueur joue deux fois par le meme dé ( on a stocké les valeurs de le dé deja joué dans une liste dans la sessions
         // donc on fait un condition si le numero déja en session se joue encore une autre fois.
-        if (session.getAttribute("dejaplaynumero") != null) {
-            ArrayList<Integer> arr = (ArrayList<Integer>) session.getAttribute("dejaplaynumero");
-            for (int i : arr) {
-                if (i == Integer.parseInt(numerode)) {
-                    System.out.println("deja played...");
-                    request.setAttribute("message", "deja playiti awldi");
-                    request.getRequestDispatcher(urlCible).forward(request, response);
+//        if (session.getAttribute("dejaplaynumero") != null) {
+//            ArrayList<Integer> arr = (ArrayList<Integer>) session.getAttribute("dejaplaynumero");
+//            for (int i : arr) {
+//                if (i == Integer.parseInt(numerode)) {
+//                    System.out.println("deja played...");
+//                    request.setAttribute("message", "deja playiti awldi");
+//                    request.getRequestDispatcher(urlCible).forward(request, response);
+//                    System.out.println("daz mn hna o rj3");
+//
+//                }
+//            }
+//        }
 
-                }
-            }
+        List<Integer> playeddelist = user.getplayedde();
+        if (playeddelist != null) {
+            if (playeddelist.contains(numerode)) ;
+            System.out.println("deja played...");
+            request.setAttribute("message", "deja playiti awldi");
+            gameState.setGameOver(true);
+            user.resetplayedde();
+            request.getRequestDispatcher(urlCible).forward(request, response);
         }
 
 
-        // on ajoute le numero de dé joué dans le tableu "dejaplay" dans la session pour la vérifcation après
-        dejaplay.add(Integer.parseInt(numerode));
-        session.setAttribute("dejaplaynumero", dejaplay);
+
+//         on ajoute le numero de dé joué dans le tableu "dejaplay" dans la session pour la vérifcation après
+//        dejaplay.add(Integer.parseInt(numerode));
+            user.addplayedde(Integer.parseInt(numerode));
+//        session.setAttribute("dejaplaynumero", dejaplay);
 
         // recevoir le numéro de dé depuis la formulaire et lui affécté un valeur aléatoire et puis le stocke dans la session
         if (numerode.equals("1")) {
@@ -83,15 +99,15 @@ public class gameServlet extends HttpServlet {
             int v3 = (int) session.getAttribute("resultde3");
 
             if (v1 < v2 && v2 < v3) {
-                score = v1 + v2 + v3;
+                user.setScore(v1 + v2 + v3);
             }
             if (v1 > v2 && v2 > v3) {
-                score = v1 * v2 * v3;
+                user.setScore(v1 * v2 * v3);
             }
 
         }
 
-        System.out.println("score" + score);
+        System.out.println("score" + user.getScore());
 
         request.setAttribute("message", "jouer encore une fois avec un autre dé");
         request.getRequestDispatcher(urlCible).forward(request, response);
