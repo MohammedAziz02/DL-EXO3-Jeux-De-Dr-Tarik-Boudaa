@@ -1,6 +1,8 @@
 <%@ page import="com.web.helpers.GameContextManagement" %>
 <%@ page import="com.bo.User" %>
-<%@ page import="com.bo.GameState" %><%--
+<%@ page import="com.bo.GameState" %>
+<%@ page import="com.bo.Message" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Lenovo
   Date: 3/18/2023
@@ -38,6 +40,37 @@
     </div>
     <%--    // titre--%>
     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+
+
+        <% if (request.getAttribute("message") != null) {%>
+
+
+        <%--    selon le type de Message une Alert s'affiche au-dessous de la formulaire (Error==> Rouge, info==> blue, Warning ==> yellow)--%>
+        <%  Message m=(Message) request.getAttribute("message");%>
+
+        <% if (m.getType() == 0) {%>
+
+        <div class="alert-primary alert text-center">
+            <%=m%>
+        </div>
+        <%}%>
+
+        <% if (m.getType() == 1) {%>
+
+        <div class="alert-warning alert text-center">
+            <%=m%>
+        </div>
+        <%}%>
+
+        <% if (m.getType() == 2) {%>
+
+        <div class="alert-danger alert text-center">
+            <%=m%>
+        </div>
+        <%}%>
+
+        <%}%>
+
         <div class="title">
             <h3 class="text-light"> bienvenue au jeux de <span class="badge bg-danger">dées</span></h3>
         </div>
