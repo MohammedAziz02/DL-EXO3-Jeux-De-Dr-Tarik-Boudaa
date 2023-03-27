@@ -24,7 +24,7 @@
     <%--        User user = (User) session.getAttribute("user"); %>--%>
     <%--    <%=user.getLogin()%>--%>
 
-    <div class="d-flex col-12 justify-content-center align-items-center bg-gradient">
+   <%-- <div class="d-flex col-12 justify-content-center align-items-center bg-gradient">
 
         <%
             var sessuser = (User) session.getAttribute("user");
@@ -38,14 +38,14 @@
         <%}%>
 
     </div>
-    <%--    // titre--%>
+    &lt;%&ndash;    // titre&ndash;%&gt;
     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
 
 
         <% if (request.getAttribute("message") != null) {%>
 
 
-        <%--    selon le type de Message une Alert s'affiche au-dessous de la formulaire (Error==> Rouge, info==> blue, Warning ==> yellow)--%>
+        &lt;%&ndash;    selon le type de Message une Alert s'affiche au-dessous de la formulaire (Error==> Rouge, info==> blue, Warning ==> yellow)&ndash;%&gt;
         <%  Message m=(Message) request.getAttribute("message");%>
 
         <% if (m.getType() == 0) {%>
@@ -70,7 +70,7 @@
         <%}%>
 
         <%}%>
-
+--%>
         <div class="title">
             <h3 class="text-light"> bienvenue au jeux de <span class="badge bg-danger">dées</span></h3>
         </div>
