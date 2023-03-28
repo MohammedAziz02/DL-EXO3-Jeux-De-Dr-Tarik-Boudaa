@@ -4,19 +4,38 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>App Game</title>
+    <title>GameOver</title>
+    <link href="<%=request.getServletContext().getContextPath()%>/style/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="min-vh-100 bg-success">
 
-<h1>Partie Términé</h1>
+<div class="container mt-5">
 
-<%=session.getAttribute("user")%>
+    <div class="row ">
+        <div class="text-center">
+            <%=session.getAttribute("user")%>
+        </div>
 
-<form action="<%=request.getServletContext().getContextPath()%>/game">
+    </div>
 
-    <input type="submit"  value="jouer encore fois"/>
-</form>
+    <div class="row">
+        <%if (request.getAttribute("message") != null) {%>
+        <div class="alert alert-primary text-center">
+            <span><%=request.getAttribute("message")%></span>
+        </div>
+        <%}%>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 row shadow bg-light p-1">
+            <div class="text-center ">
+                <form action="<%=request.getServletContext().getContextPath()%>/game">
 
+                    <input type="submit" class="btn-outline-primary col-12" value="jouer encore fois"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>

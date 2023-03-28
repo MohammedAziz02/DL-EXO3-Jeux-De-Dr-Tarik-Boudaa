@@ -52,10 +52,8 @@ public class LoginServlet extends HttpServlet {
                 // On stocke l'objet stockant l'état de jeu dans la session
                 GameState gameSate = new GameState(user);
                 req.getSession().setAttribute("gameState", gameSate);
-
                 // On stocke l'User authentifié dans la session
                 req.getSession().setAttribute("user", user);
-
                 // On envoie une vue qu'est la page home comme résultat
                 getServletContext().getRequestDispatcher(gamePage).forward(req, resp);
 

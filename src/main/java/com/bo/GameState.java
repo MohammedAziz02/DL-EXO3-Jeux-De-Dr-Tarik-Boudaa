@@ -5,7 +5,6 @@ import java.util.List;
 
 public class GameState {
     private User user;
-
     private boolean gameOver = false;
 
     private List<Message> messages = new ArrayList<Message>();
