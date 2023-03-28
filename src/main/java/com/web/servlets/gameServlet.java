@@ -62,7 +62,7 @@ public class gameServlet extends HttpServlet {
 
             }
 
-            //condition sur si ....
+            //condition sur si ......
 
             if (informations_dee.size() < 3) {
                 if (informations_dee.get(2) == 1 && informations_dee.get(2) == 6) {
