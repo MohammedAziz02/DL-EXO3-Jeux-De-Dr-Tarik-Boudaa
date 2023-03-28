@@ -17,7 +17,7 @@ public class GameState {
     }
 
     public String toString() {
-        return "GameState [Score=" + user.getScore() + ", messages="
+        return "GameState [user courant Score=" + user.getScore() + ", messages="
                 + messages + "]";
     }
 

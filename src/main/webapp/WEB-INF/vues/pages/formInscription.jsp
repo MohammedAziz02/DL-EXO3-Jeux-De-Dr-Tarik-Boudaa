@@ -26,8 +26,8 @@
 
         <%--    // formulaire de jeux--%>
         <div class="container-fluid w-75 p-4 shadow bg-light">
-            <div>
-                <a href="<%=request.getServletContext().getContextPath()%>/login"><span class="badge bg-info"> go to login</span></a>
+            <div class="row">
+                <a class="col-12" href="<%=request.getServletContext().getContextPath()%>/login"><span class="badge bg-info"> go to login</span></a>
             </div>
             <form action="<%=request.getServletContext().getContextPath()%>/inscription" method="POST">
                 <div class="form-group">

@@ -10,11 +10,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!Doctype html>
 <html>
 <head>
     <title>Game Party</title>
-    <link href="<%=request.getServletContext().getContextPath()%>/style/bootstrap.min.css"
-          rel="stylesheet">
+    <link href="<%=request.getServletContext().getContextPath()%>/style/bootstrap.min.css"  rel="stylesheet">
 </head>
 <body>
 
@@ -81,7 +81,12 @@
             <form action="<%=request.getServletContext().getContextPath()%>/game" method="POST">
                 <div class="mb-3">
                     <label>Numéro de dé :</label>
-                    <input type="text" class="form-control" placeholder="N° de Dé" name="numerode">
+<%--                    <input type="text" class="form-control" placeholder="N° de Dé" name="numerode">--%>
+                        <select class="form-select" name="numerode" >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
 
                 </div>
 

@@ -47,8 +47,7 @@ public class UserManagementServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String errorPage = "/WEB-INF/vues/pages/error.jsp";
-		String okPage = "/WEB-INF/vues/pages/operationOK.jsp";
-		String loginForm = "/WEB-INF/vues/pages/loginForm.jsp";
+		String loginForm = "/WEB-INF/vues/pages/loginpage.jsp";
 		ServletContext cntx = getServletContext();
 
 		String nom = request.getParameter("nom");
@@ -69,7 +68,6 @@ public class UserManagementServlet extends HttpServlet {
 		// On teste si un User existe avec le login choisit
 
 		if (gameContext.getUserByLogin(login) != null) {
-
 			// Ajouter des message d'erreur dans la requete
 			messages.add(new Message("Login existe déjà", Message.WARN));
 			request.setAttribute("messages", messages);
